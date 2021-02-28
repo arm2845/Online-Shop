@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import *
 import json
@@ -55,3 +55,8 @@ def updateItem(request):
 def confirm(request):
     return render(request, 'store/confirm_order.html')
 
+
+def view_product(request, pk):
+    product =get_object_or_404(Product, pk=pk)
+    context = {'product': product}
+    return render(request, 'store/view.html', context)

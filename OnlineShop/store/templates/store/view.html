@@ -1,0 +1,14 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<body>
+
+<h6><strong>Product name: {{ product.name }}</strong></h6>
+<h6><strong>Product price: ${{ product.price }}</strong></h6>
+<img src="{{product.imageURL}}">
+<br>
+<br>
+<a href="{% url 'Store' %}" class="btn btn-warning">Back to home page</a>
+</body>
+
+{% endblock content %}

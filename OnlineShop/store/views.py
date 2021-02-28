@@ -51,3 +51,7 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+
+def confirm(request):
+    return render(request, 'store/confirm_order.html')
+

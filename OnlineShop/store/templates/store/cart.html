@@ -48,6 +48,17 @@
                     <div style="flex:1">${{ item.get_total }}</div>
                 </div>
                 {% endfor %}
+
+                {% if request.user.is_authenticated %}
+
+                <a href="{% url 'Confirm' %}" class="btn btn-warning">Buy</a>
+
+                {% else %}
+
+                <a href="{% url 'CreateUser' %}" class="btn btn-warning">Buy</a>
+
+                {% endif %}
+
 			</div>
 		</div>
 	</div>

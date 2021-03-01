@@ -60,3 +60,9 @@ def view_product(request, pk):
     product =get_object_or_404(Product, pk=pk)
     context = {'product': product}
     return render(request, 'store/view.html', context)
+
+
+def user_profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    context = {'user': user}
+    return render(request, 'store/user_profile.html', context)

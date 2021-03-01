@@ -64,9 +64,9 @@
 
 </head>
 <body>
-
+    <div class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="{% url 'Store' %}">OnlineShop</a>
+      <a class="navbar-brand" href="{% url 'Store' %}">WineShop</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -80,13 +80,16 @@
         <div class="form-inline my-2 my-lg-0">
 
             {% if request.user.is_authenticated %}
+            <div>
             <a href="{% url 'UserProfile' user.id %}" class="btn btn-warning">{{user.username}}</a>
             <a href="{% url 'LogOut' %}" class="btn btn-warning">LogOut</a>
+            </div>
 
             {% else %}
+            <div>
             <a href="{% url 'LogIn' %}" class="btn btn-warning">LogIn</a>
             <a href="{% url 'CreateUser' %}" class="btn btn-warning">Register</a>
-
+            </div>
             {% endif %}
 
             <a href="{% url 'Cart' %}">
@@ -97,6 +100,7 @@
         </div>
       </div>
     </nav>
+    </div>
 
         <div class="container">
             <br>

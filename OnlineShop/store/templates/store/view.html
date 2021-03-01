@@ -4,19 +4,25 @@
 <body>
 {% block content %}
 
-<h6><strong>Product name: {{ product.name }}</strong></h6>
-<h6><strong>Brand: {{ product.brand }}</strong></h6>
-<h6><strong>Category: {{ product.category }}</strong></h6>
-<h6><strong>Country: {{ product.country }}</strong></h6>
-<h6><strong>Percent of alcohol: {{ product.percent_of_alcohol }}%</strong></h6>
-<h6><strong>Capacity: {{ product.capacity }}ml</strong></h6>
-<h6><strong>Price: {{ product.price }} AMD</strong></h6>
-<img src="{{product.imageURL}}">
-<br>
-<br>
-<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-<a href="{% url 'Store' %}" class="btn btn-warning">Back to home page</a>
-
+<div class="post-container">
+    <div class="post-thumb"><img class="zoom" src="{{product.imageURL}}"></div>
+    <div class="post-content">
+        <h3 class="post-title">{{ product.name }}</h3>
+        <br>
+        <p>
+            <h6><strong>Brand: {{ product.brand }}</strong></h6>
+            <h6><strong>Category: {{ product.category }}</strong></h6>
+            <h6><strong>Country: {{ product.country }}</strong></h6>
+            <h6><strong>Percent of alcohol: {{ product.percent_of_alcohol }}%</strong></h6>
+            <h6><strong>Capacity: {{ product.capacity }} ml</strong></h6>
+            <h6><strong>Price: {{ product.price }} AMD</strong></h6>
+            <br>
+            <br>
+            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <a href="{% url 'Store' %}" class="btn btn-warning">Back to home page</a>
+        </p>
+   </div>
+</div>
 {% endblock content %}
 </body>
 

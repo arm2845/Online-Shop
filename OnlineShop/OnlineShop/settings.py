@@ -133,3 +133,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 LOGIN_REDIRECT_URL = 'Store'
 LOGIN_URL = 'LogIn'
 LOGOUT_REDIRECT_URL = 'Store'
+
+USE_THOUSAND_SEPARATOR = True

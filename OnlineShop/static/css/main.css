@@ -98,3 +98,45 @@ h1,h2,h3,h4,h5,h6{
 	display: none!important;
 }
 
+
+.img{
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px;
+  width: 300px;
+}
+
+.post-container {
+    margin: 20px 20px 0 0;
+    border: 5px solid #333;
+    overflow: auto;
+    border-radius: 10px;
+}
+.post-thumb {
+    float: left
+}
+.post-thumb img {
+    display: block
+}
+.post-content {
+    margin: 20px;
+}
+.post-title {
+    font-weight: bold;
+    font-size: 200%
+}
+
+.zoom {
+  padding: 50px;
+  transition: transform .2s;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 5px;
+  width: 300px;
+}
+
+.zoom:hover {
+  transform: scale(2.0);
+}
+

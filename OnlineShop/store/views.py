@@ -57,8 +57,12 @@ def confirm(request):
 
 
 def view_product(request, pk):
-    product =get_object_or_404(Product, pk=pk)
-    context = {'product': product}
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+    product = get_object_or_404(Product, pk=pk)
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'product': product}
     return render(request, 'store/view.html', context)
 
 

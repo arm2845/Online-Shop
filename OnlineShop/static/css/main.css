@@ -142,4 +142,14 @@ h1,h2,h3,h4,h5,h6{
   transform: scale(2.0);
 }
 
+.imgp{
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    padding: 5px;
+    width: 350px;
+    height: 300px;
+}
+
+
+
 

@@ -81,7 +81,7 @@
 
             {% if request.user.is_authenticated %}
             <div>
-            <a href="{% url 'UserProfile' user.id %}" class="btn btn-warning">{{user.username}}</a>
+            <a href="{% url 'ProfilePage' %}" class="btn btn-warning">{{user.username}}</a>
             <a href="{% url 'LogOut' %}" class="btn btn-warning">LogOut</a>
             </div>
 

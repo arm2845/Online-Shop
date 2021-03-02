@@ -1,0 +1,11 @@
+{% extends 'store/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3>Update Profile</h3>
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form | crispy }}
+			<br>
+			<input type="submit" value="Save changes">
+		</form>
+{% endblock content%}

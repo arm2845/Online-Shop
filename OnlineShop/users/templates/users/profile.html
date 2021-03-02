@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<body>
+{% block content %}
+<div class="post-container">
+    <div class="post-thumb"><img class="imgp" src="{{profile.image.url}}" alt="Error"></div>
+    <div class="post-content">
+        <h3 class="post-title">Welcome to your profile page!</h3>
+        <br>
+        <p>
+            <h6><strong>Name: {{profile.user}}</strong></h6>
+            <h6><strong>Surname: {{profile.surname}}</strong></h6>
+            <h6><strong>Phone: {{profile.phone_number}}</strong></h6>
+            <h6><strong>Email: {{profile.email}}</strong></h6>
+            <h6><strong>Shipping address: {{profile.address}}</strong></h6>
+            <br>
+            <br>
+            <a class="btn btn-outline-secondary add-btn update-cart" href= "{% url 'ProfileUpdate' %}">Update</a>
+            <a href="{% url 'Store' %}" class="btn btn-warning">Back to home page</a>
+        </p>
+   </div>
+</div>
+{% endblock content %}
+</body>

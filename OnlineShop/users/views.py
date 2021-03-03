@@ -50,5 +50,8 @@ def profile_update(request):
                 messages.success(request, 'Profile was updated successfully!')
             return redirect('ProfilePage')
 
+    data = cartData(request)
+    cartItems = data['cartItems']
+
     messages.warning(request,'Profile was not updated successfully!' )
-    return render(request, "users/profile_update.html", {'form': form})
+    return render(request, "users/profile_update.html", {'cartItems': cartItems, 'form': form})

@@ -1,11 +1,19 @@
 {% extends 'store/main.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h3>Update Profile</h3>
+
+<div class="post-container">
+
+    <div class="post-content">
+        <h3 class="post-title">Update Profile</h3>
+        <p>
 		<form method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form | crispy }}
 			<br>
-			<input type="submit" value="Save changes">
+			<button class="btn btn-warning" type="submit">Save changes</button>
 		</form>
+		</p>
+   </div>
+</div>
 {% endblock content%}

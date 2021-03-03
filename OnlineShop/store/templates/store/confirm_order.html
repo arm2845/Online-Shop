@@ -1,28 +1,19 @@
+{% extends 'store/main.html' %}
 {% load static %}
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-
-    <style>
-        .center-column{
-        width:600px;
-        margin: 20px auto;
-        padding: 50px;
-        background-color: hsl(0, 0%, 98%);
-        border-radius: 3px;
-        box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
-}
-
-    </style>
-</head>
+{% block content %}
 <body>
-    <div class="center-column">
-
-    <h3>Your order is completed.</h3>
-    <h3>The shipping will take 7 days!</h3>
-    <h3>Thank you for choosing our shop!</h3>
+<div class="post-container">
+    <div class="post-content">
+        <h3 class="post-title">Confirm order</h3>
         <br>
-        <a href="{% url 'Store' %}" class="btn btn-warning">Back to home page</a>
-    </div>
+        <p>
+            <h5>Items in cart: <strong>{{ order.get_cart_items }}</strong></h5>
+            <h5>Total amount: <strong>{{ order.get_cart_total }} AMD</strong></h5>
+            <br>
+            <br>
+            <a href="{% url 'Cart' %}" class="btn btn-warning">Back to cart</a>
+        </p>
+   </div>
+</div>
 </body>
+{% endblock content %}

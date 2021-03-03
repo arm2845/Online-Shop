@@ -53,7 +53,13 @@ def updateItem(request):
 
 
 def confirm(request):
-    return render(request, 'store/confirm_order.html')
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+
+    return render(request, 'store/confirm_order.html', context)
 
 
 def view_product(request, pk):

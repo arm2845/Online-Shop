@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import *
 import json
 from .utils import cookieCart, cartData
+from users.models import Profile
 
 
 def store(request):
@@ -57,7 +58,8 @@ def confirm(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    profile = Profile.objects.get(user=request.user.id)
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'profile': profile}
 
     return render(request, 'store/confirm_order.html', context)
 

@@ -4,14 +4,19 @@
 <body>
 <div class="post-container">
     <div class="post-content">
-        <h3 class="post-title">Confirm order</h3>
+        <h3 class="post-title">Please, check your data and confirm your order !</h3>
         <br>
         <p>
             <h5>Items in cart: <strong>{{ order.get_cart_items }}</strong></h5>
             <h5>Total amount: <strong>{{ order.get_cart_total }} AMD</strong></h5>
             <br>
+            <h5>Phone number: <strong>{{ profile.phone_number }}</strong></h5>
+            <h5>Shipping address: <strong>{{ profile.address }}</strong></h5>
             <br>
+            <br>
+            <a href="{% url 'Store' %}" class="btn btn-outline-secondary add-btn update-cart">Confirm order</a>
             <a href="{% url 'Cart' %}" class="btn btn-warning">Back to cart</a>
+            <a href="{% url 'ProfileUpdate' %}" class="btn btn-warning">Change my data</a>
         </p>
    </div>
 </div>

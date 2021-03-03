@@ -45,11 +45,13 @@
                 {% if request.user.is_authenticated %}
 
                 <a class="btn btn-outline-dark" href="{% url 'Store' %}">&#x2190;Continue Shopping</a>
+                <a href="#" class="btn btn-warning">Back to the top</a>
                 <a href="{% url 'Confirm' %}" class="btn btn-warning">Buy</a>
 
                 {% else %}
 
                 <a class="btn btn-outline-dark" href="{% url 'Store' %}">&#x2190;Continue Shopping</a>
+                <a href="#" class="btn btn-warning">Back to the top</a>
                 <a href="{% url 'CreateUser' %}" class="btn btn-warning">Buy</a>
 
                 {% endif %}

@@ -81,6 +81,7 @@
 
             {% if request.user.is_authenticated %}
             <div>
+<!--                <img src="{{profile.image.url}}">-->
             <a href="{% url 'ProfilePage' %}" class="btn btn-warning">{{user.username}}</a>
             <a href="{% url 'LogOut' %}" class="btn btn-warning">LogOut</a>
             </div>

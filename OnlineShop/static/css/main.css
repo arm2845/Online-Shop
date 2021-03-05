@@ -144,5 +144,16 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+.pagination a {
+  color: green;
+  float: black;
+  padding: 2px 4px;
+  text-decoration: bold;
+  border: 1px solid #ddd;
+}
 
-
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}

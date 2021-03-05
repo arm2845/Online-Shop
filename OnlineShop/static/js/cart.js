@@ -28,6 +28,14 @@ function addCookieItem(productId, action){
 		}
 	}
 
+
+
+    if (action == 'finish'){
+		cart[productId]['quantity'] = 0}
+
+
+
+
 	if (action == 'remove'){
 		cart[productId]['quantity'] -= 1
 

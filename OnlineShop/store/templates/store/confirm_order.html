@@ -14,7 +14,7 @@
             <h5>Shipping address: <strong>{{ profile.address }}</strong></h5>
             <br>
             <br>
-            <a href="{% url 'Store' %}" class="btn btn-outline-secondary add-btn update-cart">Confirm order</a>
+            <a href="{% url 'OrderCompleted' %}" class="btn btn-outline-secondary add-btn update-cart">Confirm order</a>
             <a href="{% url 'Cart' %}" class="btn btn-warning">Back to cart</a>
             <a href="{% url 'ProfileUpdate' %}" class="btn btn-warning">Change my data</a>
         </p>

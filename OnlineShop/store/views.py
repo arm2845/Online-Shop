@@ -4,15 +4,18 @@ from .models import *
 import json
 from .utils import cookieCart, cartData
 from users.models import Profile
+from django.core.paginator import Paginator
 
 
 def store(request):
 
     data = cartData(request)
     cartItems = data['cartItems']
-
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    paginator = Paginator(products, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj, 'cartItems': cartItems}
     return render(request, 'store/store.html', context)
 
 
@@ -76,3 +79,13 @@ def user_profile(request, pk):
     user = get_object_or_404(User, pk=pk)
     context = {'user': user}
     return render(request, 'store/user_profile.html', context)
+
+
+def order_completed(request):
+    data = cartData(request)
+    order = data['order']
+    items = data['items']
+    cartItems = 0
+    order = 0
+    items = 0
+    return render(request, 'store/order_completed.html', {'cartItems': cartItems, 'order': order,'items': items})

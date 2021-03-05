@@ -74,20 +74,23 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'Store' %}">Store<span class="sr-only"></span></a>
+            <a href="{% url 'Searchproducts' %}"><input type="submit" name="submit" value="Search products"/></a>
+          </li>
           </li>
         </ul>
+
         <div class="form-inline my-2 my-lg-0">
 
             {% if request.user.is_authenticated %}
             <div>
-<!--                <img src="{{profile.image.url}}">-->
+
             <a href="{% url 'ProfilePage' %}" class="btn btn-warning">{{user.username}}</a>
             <a href="{% url 'LogOut' %}" class="btn btn-warning">LogOut</a>
             </div>
 
             {% else %}
             <div>
+
             <a href="{% url 'LogIn' %}" class="btn btn-warning">LogIn</a>
             <a href="{% url 'CreateUser' %}" class="btn btn-warning">Register</a>
             </div>

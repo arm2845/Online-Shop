@@ -5,6 +5,7 @@ import json
 from .utils import cookieCart, cartData
 from users.models import Profile
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 def store(request):
@@ -89,3 +90,32 @@ def order_completed(request):
     order = 0
     items = 0
     return render(request, 'store/order_completed.html', {'cartItems': cartItems, 'order': order,'items': items})
+
+
+def searchposts(request):
+
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    if request.method == 'GET':
+        query = request.GET.get('q')
+
+        submitbutton= request.GET.get('submit')
+
+        if query is not None:
+            lookups = Q(name__icontains=query) | Q(country__icontains=query)
+
+            products = Product.objects.filter(lookups).distinct()
+
+            context = {'products': products,
+                     'submitbutton': submitbutton,
+                       'cartItems': cartItems}
+
+            return render(request, 'store/search.html', context)
+
+        else:
+            context = {'cartItems': cartItems}
+            return render(request, 'store/search.html', context)
+
+    else:
+        return render(request, 'store/search.html')

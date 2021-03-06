@@ -110,39 +110,8 @@ def user_profile(request, pk):
 def order_completed(request):
     data = cartData(request)
     order = data['order']
-    cartItems = data['cartItems']
+    cartItems = 0
     order.complete = True
     order.save()
 
-    return render(request, 'store/order_completed.html', { 'order': order, 'cartItems': cartItems})
-
-
-# def searchposts(request):
-#
-#     data = cartData(request)
-#     cartItems = data['cartItems']
-#     products = Product.objects.all()
-#     context = {'products': products, 'cartItems': cartItems}
-#
-#     if request.method == 'POST':
-#         query = request.POST.get('q')
-#         print(request.POST)
-#         submitbutton= request.POST.get('submit')
-#
-#         if query is not None:
-#             lookups = Q(name__icontains=query) | Q(country__icontains=query)
-#
-#             products = Product.objects.filter(lookups).distinct()
-#
-#             context = {'products': products,
-#                      'submitbutton': submitbutton,
-#                        'cartItems': cartItems}
-#
-#             return render(request, 'store/search.html', context)
-#
-#         else:
-#             context = {'cartItems': cartItems}
-#             return render(request, 'store/search.html', context)
-#
-#     else:
-#         return render(request, 'store/search.html', context)
+    return render(request, 'store/order_completed.html', {'order': order, 'cartItems': cartItems})

@@ -17,6 +17,31 @@ def store(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'cartItems': cartItems}
+
+    if request.method == 'POST':
+        query = request.POST.get('q')
+        submitbutton= request.POST.get('submit')
+
+        if query is not None:
+            lookups = Q(name__icontains=query) | Q(country__icontains=query)
+
+            products = Product.objects.filter(lookups).distinct()
+            paginator = Paginator(products, 6)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+
+            context = {'products': products,
+                    'submitbutton': submitbutton,
+                    'cartItems': cartItems,
+                    'page_obj': page_obj
+                       }
+
+            return render(request, 'store/store.html', context)
+
+        else:
+
+            return render(request, 'store/store.html', context)
+
     return render(request, 'store/store.html', context)
 
 
@@ -85,37 +110,39 @@ def user_profile(request, pk):
 def order_completed(request):
     data = cartData(request)
     order = data['order']
-    items = data['items']
-    cartItems = 0
-    order = 0
-    items = 0
-    return render(request, 'store/order_completed.html', {'cartItems': cartItems, 'order': order,'items': items})
-
-
-def searchposts(request):
-
-    data = cartData(request)
     cartItems = data['cartItems']
+    order.complete = True
+    order.save()
 
-    if request.method == 'GET':
-        query = request.GET.get('q')
+    return render(request, 'store/order_completed.html', { 'order': order, 'cartItems': cartItems})
 
-        submitbutton= request.GET.get('submit')
 
-        if query is not None:
-            lookups = Q(name__icontains=query) | Q(country__icontains=query)
-
-            products = Product.objects.filter(lookups).distinct()
-
-            context = {'products': products,
-                     'submitbutton': submitbutton,
-                       'cartItems': cartItems}
-
-            return render(request, 'store/search.html', context)
-
-        else:
-            context = {'cartItems': cartItems}
-            return render(request, 'store/search.html', context)
-
-    else:
-        return render(request, 'store/search.html')
+# def searchposts(request):
+#
+#     data = cartData(request)
+#     cartItems = data['cartItems']
+#     products = Product.objects.all()
+#     context = {'products': products, 'cartItems': cartItems}
+#
+#     if request.method == 'POST':
+#         query = request.POST.get('q')
+#         print(request.POST)
+#         submitbutton= request.POST.get('submit')
+#
+#         if query is not None:
+#             lookups = Q(name__icontains=query) | Q(country__icontains=query)
+#
+#             products = Product.objects.filter(lookups).distinct()
+#
+#             context = {'products': products,
+#                      'submitbutton': submitbutton,
+#                        'cartItems': cartItems}
+#
+#             return render(request, 'store/search.html', context)
+#
+#         else:
+#             context = {'cartItems': cartItems}
+#             return render(request, 'store/search.html', context)
+#
+#     else:
+#         return render(request, 'store/search.html', context)

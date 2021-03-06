@@ -8,5 +8,4 @@ urlpatterns = [
     path('confirm/', views.confirm, name='Confirm'),
     path('viewproduct/<int:pk>', views.view_product, name='ViewProduct'),
     path('order_completed/', views.order_completed, name='OrderCompleted'),
-    path('search/', views.searchposts, name='Searchproducts')
 ]

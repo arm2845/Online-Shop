@@ -6,6 +6,8 @@ from .utils import cookieCart, cartData
 from users.models import Profile
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 def store(request):
@@ -45,6 +47,7 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
+@login_required()
 def cart(request):
 
     data = cartData(request)
@@ -56,6 +59,7 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 
+@login_required()
 def updateItem(request):
 
     data = json.loads(request.body)
@@ -82,6 +86,7 @@ def updateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 
+@login_required()
 def confirm(request):
     data = cartData(request)
     cartItems = data['cartItems']
@@ -101,17 +106,23 @@ def view_product(request, pk):
     return render(request, 'store/view.html', context)
 
 
+@login_required()
 def user_profile(request, pk):
     user = get_object_or_404(User, pk=pk)
     context = {'user': user}
     return render(request, 'store/user_profile.html', context)
 
 
+@login_required()
 def order_completed(request):
     data = cartData(request)
     order = data['order']
     cartItems = 0
     order.complete = True
     order.save()
+    message = 'Your order was confirmed. Thank you for choosing us. Regards Wineshop administration.'
+    profile = Profile.objects.get(user=request.user.id)
+    email = profile.email
+    send_mail('Order confirmation', message, 'thebestonlineshopever@gmail.com', [email], fail_silently=False)
 
     return render(request, 'store/order_completed.html', {'order': order, 'cartItems': cartItems})

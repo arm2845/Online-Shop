@@ -2,7 +2,13 @@
 {% load static %}
 {% block content %}
 <body>
-<h2>Your order is completed!</h2>
+<div class="post-container">
+    <div class="post-content">
+        <h2 class="post-title">Your order is completed !</h2>
+        <h3>We have sent you an email about confirmation.</h3>
+        <br>
  <a class="btn btn-outline-dark" href="{% url 'Store' %}">&#x2190;Continue Shopping</a>
+    </div>
+</div>
 </body>
 {% endblock content %}

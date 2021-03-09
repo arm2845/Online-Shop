@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import *
 import json
-from .utils import cookieCart, cartData
+from .utils import cartData
 from users.models import Profile
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -47,7 +47,6 @@ def store(request):
     return render(request, 'store/store.html', context)
 
 
-@login_required()
 def cart(request):
 
     data = cartData(request)
@@ -118,6 +117,7 @@ def order_completed(request):
     data = cartData(request)
     order = data['order']
     cartItems = 0
+    items = data['items']
     order.complete = True
     order.save()
     message = 'Your order was confirmed. Thank you for choosing us. Regards Wineshop administration.'
@@ -125,4 +125,7 @@ def order_completed(request):
     email = profile.email
     send_mail('Order confirmation', message, 'thebestonlineshopever@gmail.com', [email], fail_silently=False)
 
-    return render(request, 'store/order_completed.html', {'order': order, 'cartItems': cartItems})
+
+    return render(request, 'store/order_completed.html', {'order': order, 'cartItems': cartItems, 'items': items})
+
+

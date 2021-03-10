@@ -21,12 +21,12 @@ def store(request):
     context = {'page_obj': page_obj, 'cartItems': cartItems}
 
     if request.method == 'POST':
-        query = request.POST.get('product')
+        query = request.POST.get('q')
 
         if query is not None:
-            lookups = Q(name__icontains=query) | Q(country__icontains=query)  # Q is used to search in multiple columns of database
+            lookups = Q(name__icontains=query) | Q(country__icontains=query) # Q is used to search in multiple columns of database
 
-            products = Product.objects.filter(lookups).distinct()  # distinct is used to avoid duplicates
+            products = Product.objects.filter(lookups).distinct() # distinct is used to avoid duplicates
             paginator = Paginator(products, 6)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)

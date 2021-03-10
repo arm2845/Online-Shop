@@ -1,10 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, ProfileForm
 from django.contrib.auth import login, authenticate
 from .models import Profile
-from django.contrib import messages
 from store.utils import cartData
-from store.models import Product
 
 
 def create(request):
@@ -34,24 +32,22 @@ def profile_page(request):
 
 
 def profile_update(request):
-    id_ = request.user.id
-    user_profile = get_object_or_404(Profile, user=id_)
-    form = ProfileForm(instance=user_profile)
+    profile = Profile.objects.get(user=request.user.id)
+    form = ProfileForm(instance=profile)
 
     if request.method == "POST":
-        form = ProfileForm(request.POST, instance=user_profile)
+        form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
 
             if request.FILES.get('image', None) != None:
                 print(request.FILES)
-                user_profile.image = request.FILES['image']
-                user_profile.save()
-                messages.success(request, 'Profile was updated successfully!')
+                profile.image = request.FILES['image']
+                profile.save()
+
             return redirect('ProfilePage')
 
     data = cartData(request)
     cartItems = data['cartItems']
 
-    messages.warning(request,'Profile was not updated successfully!' )
     return render(request, "users/profile_update.html", {'cartItems': cartItems, 'form': form})

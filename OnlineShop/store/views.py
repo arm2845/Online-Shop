@@ -16,27 +16,22 @@ def store(request):
     cartItems = data['cartItems']
     products = Product.objects.all()
     paginator = Paginator(products, 6)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get('page') # returns the current page number
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'cartItems': cartItems}
 
     if request.method == 'POST':
-        query = request.POST.get('q')
-        submitbutton= request.POST.get('submit')
+        query = request.POST.get('product')
 
         if query is not None:
-            lookups = Q(name__icontains=query) | Q(country__icontains=query)
+            lookups = Q(name__icontains=query) | Q(country__icontains=query)  # Q is used to search in multiple columns of database
 
-            products = Product.objects.filter(lookups).distinct()
+            products = Product.objects.filter(lookups).distinct()  # distinct is used to avoid duplicates
             paginator = Paginator(products, 6)
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
 
-            context = {'products': products,
-                    'submitbutton': submitbutton,
-                    'cartItems': cartItems,
-                    'page_obj': page_obj
-                       }
+            context = {'products': products, 'cartItems': cartItems, 'page_obj': page_obj}
 
             return render(request, 'store/store.html', context)
 

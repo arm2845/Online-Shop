@@ -16,7 +16,7 @@ def store(request):
     cartItems = data['cartItems']
     products = Product.objects.all()
     paginator = Paginator(products, 6)
-    page_number = request.GET.get('page') # returns the current page number
+    page_number = request.GET.get('page')  # returns the current page number
     page_obj = paginator.get_page(page_number)
     context = {'page_obj': page_obj, 'cartItems': cartItems}
 
@@ -120,7 +120,9 @@ def order_completed(request):
     email = profile.email
     send_mail('Order confirmation', message, 'thebestonlineshopever@gmail.com', [email], fail_silently=False)
 
-
     return render(request, 'store/order_completed.html', {'order': order, 'cartItems': cartItems, 'items': items})
+
+
+
 
 
